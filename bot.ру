@@ -1,0 +1,21 @@
+import telebot
+from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
+
+TOKEN = "ТВОЙ_ТОКЕН_ЗДЕСЬ"
+bot = telebot.TeleBot(TOKEN)
+
+@bot.message_handler(commands=['start'])
+def send_welcome(message):
+    markup = InlineKeyboardMarkup()
+    button = InlineKeyboardButton(
+        text="📄 Скачать инструкцию",
+        url="https://t.me/PASIVMANI_Bot?start=downloadpdf"
+    )
+    markup.add(button)
+    bot.send_message(
+        message.chat.id,
+        "👋 Добро пожаловать в PASIVMANI!\nНажми на кнопку, чтобы получить инструкцию.",
+        reply_markup=markup
+    )
+
+bot.polling(none_stop=True)
